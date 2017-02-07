@@ -1,0 +1,4 @@
+int64 type # 0 means preset features, 1 means custom features
+string activity
+---
+#No return data

@@ -122,6 +122,8 @@ class BehaviorModule(ALModule):
         print "Received confirmation to proceed"
         
         stop_spinning = True
+        return WaitNextResponse(0)
+        
 
     def waitnext_server(self):
         global stop_spinning
@@ -248,12 +250,15 @@ class BehaviorModule(ALModule):
     '''
     
     def introduction(self):
-        self.say_animated("^start(animations/Stand/Gestures/Hey_3) Hey there," + user['name'] + ", I'm' Leia, your personal wardrobe assistant. ^wait(animations/Stand/Gestures/Hey_3)")
-        self.say_contextual("My job is to help you pick out what to wear today.")
+        self.say_animated("^start(animations/Stand/Gestures/Hey_3) Hey there," + user['name'] + ". ^wait(animations/Stand/Gestures/Hey_3)")
+        self.say_animated("^start(animations/Stand/Gestures/Me_2)I'm Leia, your personal wardrobe assistant.^wait(animations/Stand/Gestures/Me_2)")
+        self.say_animated("^start(animations/Stand/Gestures/Explain_4) My job is to help you pick out what to wear today. ^wait(animations/Stand/Gestures/Explain_4)")
         self.say_animated("^start(animations/Stand/Gestures/Explain_2) First, I'll need to know what you're doing today. ^wait(animations/Stand/Gestures/Explain_2)")
+        self.say_animated("^start(animations/Stand/Gestures/Explain_2) There are many preset activities available. ^wait(animations/Stand/Gestures/Explain_2)")
+        self.say_animated("^start(animations/Stand/Gestures/Explain_5) Or, you can choose your own custom settings. ^wait(animations/Stand/Gestures/Explain_5)")
         self.say_post("On the touch screen, let me know what type of activity you're planning.")
         self.beckon()
-        self.say_animated("^start(animations/Stand/Gestures/Explain_2) There are many preset activities, or you can choose your own custom settings.")
+        self.reset_eyes()
         self.neutral()
         self.featuretype_server()
  
@@ -263,8 +268,9 @@ class BehaviorModule(ALModule):
         first_runthrough = False
        
         self.breathing_off()
-        self.say_animated("^start(animations/Stand/Gestures/Explain_2) Okay, first I need some information about your plans for today and your preferences")
-        self.say_animated("^start(animations/Stand/Gestures/Explain_2) Firstly, I'll need to know if you're getting dressed to do an athletic activity or not. Just let me know by inputting your answer the touch screen.") 
+        self.say_animated("^start(animations/Stand/Gestures/Explain_2) Okay, first I need some information about your plans for today and your preferences. ^wait(animations/Stand/Gestures/Explain_2)")
+        self.say_animated("^start(animations/Stand/Gestures/HeSays_2) Firstly, I'll need to know if you're getting dressed to do an athletic activity or not. ^wait(animations/Stand/Gestures/HeSays_2)")
+        self.say_animated("^start(animations/Stand/Gestures/ShowFloor_1)Just let me know by inputting your answer on the touch screen.^wait(animations/Stand/Gestures/ShowFloor_1)") 
         self.neutral()
         
     def wait_first_feature(self):
@@ -273,7 +279,8 @@ class BehaviorModule(ALModule):
 
     def comfort(self):
         self.breathing_off()
-        self.say_animated("^start(animations/Stand/Gestures/Explain_2) Okay, now I need to know how important your comfort level is to you today. Choose a value on the scale from one to five, where five means comfort is very important to you, and one means comfort isn't a priority.")
+        self.say_animated("^start(animations/Stand/Gestures/Enthusiastic_2) Okay, now I need to know how important your comfort level is to you today. ^wait(animations/Stand/Gestures/Enthusiastic_2)")
+        self.say_contextual("Choose a value on the scale from one to five, where five means comfort is very important to you, and one means comfort isn't a priority.")
         self.neutral()
     
     def wait_second_feature(self):
@@ -282,7 +289,7 @@ class BehaviorModule(ALModule):
     
     def inside_outside(self):
         self.breathing_off()
-        self.say_animated("^start(animations/Stand/Gestures/Explain_2) Next, I'll need to know if you're going to be spending your day ^start(animations/Stand/Gestures/Choice_2) mostly inside, or mostly outside.")
+        self.say_animated("^start(animations/Stand/Gestures/Explain_7) Next, I'll need to know if you're going to be spending your day ^start(animations/Stand/Gestures/Choice_2) mostly inside, or mostly outside. ^wait(animations/Stand/Gestures/Choice_2)")
         self.neutral()
     
     def wait_third_feature(self):
@@ -291,7 +298,9 @@ class BehaviorModule(ALModule):
 
     def casual_formal(self):
         self.breathing_off()
-        self.say_animated("^start(animations/Stand/Gestures/Explain_2) Lastly, I need to know what type of dress code you're looking to meet today. Your three options are casual, dressy casual, and formal. Pick the closest option to your requirements on the touch screen.")
+        self.say_animated("^start(animations/Stand/Gestures/Give_1) Lastly, I need to know what type of dress code you're looking to meet today. ^wait(animations/Stand/Gestures/Give_1)")
+        self.say_animated("Your three ^start(animations/Stand/Gestures/CountThree_2) options are  formal,  smart casual, and casual. ^wait(animations/Stand/Gestures/CountThree_2) ")
+        self.say_animated("^start(animations/Stand/Gestures/ShowFloor_1) Pick the closest option to your requirements on the touch screen. ^wait(animations/Stand/Gestures/ShowFloor_1)")
         self.neutral() 
 
     def wait_fourth_feature(self):
@@ -302,40 +311,45 @@ class BehaviorModule(ALModule):
         global first_runthrough
         self.breathing_off()
         if first_runthrough == True:
-            self.say_animated("^start(animations/Stand/Gestures/Enthusiastic_1)Great, you chose," + user['activity'] + ".")
+            self.say_animated("^start(animations/Stand/Gestures/Enthusiastic_1)Great, you chose," + user['activity'] + ".^wait(animations/Stand/Gestures/Enthusiastic_1)" )
             first_runthrough = False
-        self.say_animated("^start(animations/Stand/Gestures/Thinking_3)Give me one moment to come up with your recommended outfit.")
+        self.say_animated("^start(animations/Stand/Gestures/Thinking_3)Give me one moment to come up with your recommended outfit. ^wait(animations/Stand/Gestures/Thinking_3)")
         self.recommendations_client()
         time.sleep(1)
-        self.say_animated("^start(animations/Stand/Gestures/Explain_2) Okay, here is your clothing recommendation for the day. I recommend you wear your" + recommendation['upper'] + ", your" + recommendation['lower'] + ", your" +
-                      recommendation['outer'] + ", and your" + recommendation['shoes'])
+        self.say_animated("^start(animations/Stand/Gestures/ShowSky_2) Okay, here is your clothing recommendation for the day. ^wait(animations/Stand/Gestures/ShowSky_2) ^start(animations/Stand/Gestures/This_1) I recommend you wear your" + recommendation['upper'] + ", your" + recommendation['lower'] + ", ^wait(animations/Stand/Gestures/This_1)  ^start(animations/Stand/Gestures/This_3)your" +
+                      recommendation['outer'] + ", ^wait(animations/Stand/Gestures/This_3)  ^start(animations/Stand/Gestures/This_4) and your" + recommendation['shoes'] + ". ^wait(animations/Stand/Gestures/This_4)")
         self.neutral()
 
     def wait_next(self):
         self.breathing_off
-        self.say_animated("^start(animations/Stand/Gestures/Explain_2) I'll give you a few moments to look over the outfit recommendation. When you're ready, hit the next button on the screen.")
+        self.say_animated("^start(animations/Stand/Gestures/Explain_2) I'll give you a few moments to look over the outfit recommendation ^wait(animations/Stand/Gestures/Explain_2).")
+        self.say_animated("^start(animations/Stand/Gestures/ShowFloor_1) When you're ready, hit the next button on the screen. ^wait(animations/Stand/Gestures/ShowFloor_1)")
         self.waitnext_server()
         self.neutral()
     
     def ask_feedback(self):
         self.breathing_off()
-        self.say_animated("^start(animations/Stand/Gestures/Explain_2) Okay, now I need you to let me know if you're happy with the recommended outfit or not. I won't be offended if you didn't like it. Use the screen to let me know if you like it or not.")
+        self.say_animated("^start(animations/Stand/Gestures/Explain_4) Okay, now I need you to let me know if you're happy with the recommended outfit or not. ^wait(animations/Stand/Gestures/Explain_4) ^start(animations/Stand/Gestures/No_2) I won't be offended if you didn't like it. ^wait(animations/Stand/Gestures/No_2)")
+        self.say_animated("^start(animations/Stand/Gestures/ShowFloor_1) Use the screen to let me know if you like it or not. ^wait(animations/Stand/Gestures/ShowFloor_1)")
+        self.neutral()
         self.waitacceptance_server()
         if user['acceptance'] == 0:
             self.outfit_rejected()
         elif user['acceptance'] == 1:
             self.outfit_accepted()
-        self.neutral()
+        
     
     def respond_rejection(self):
         self.breathing_off()
-        self.say_animated("^start(animations/Stand/Gestures/Sad_2) That's too bad. ^wait(animations/Stand/Gestures/Sad_2) ^start(animations/Stand/Gestures/Determined_1) Let's fix that then. Let me know if you want to replace ^start(animations/Stand/Gestures/Choice_2) the whole outfit, or just part of the outfit.")
+        self.say_animated("^start(animations/Stand/Emotions/Negative/Sad_2) That's too bad. ^wait(animations/Stand/Emotions/Negative/Sad_2)")
+        self.say_animated("^start(animations/Stand/Gestures/Determined_1) Let's fix that then. Let me know if you want to replace ^start(animations/Stand/Gestures/Choice_2) the whole outfit, or just part of the outfit. ^wait(animations/Stand/Gestures/Choice_2)")
+        self.neutral()
         self.waitreplace_server()
         if replace['all'] == 1:
             self.replace_all()
         else:
             self.replace_part()
-        self.neutral()
+        
 
     def respond_acceptance(self):
         self.breathing_off()
@@ -346,9 +360,10 @@ class BehaviorModule(ALModule):
     def respond_replace(self):
         self.breathing_off()
         if replace['all'] == 1:
-            self.say_animated("^start(animations/Stand/Gestures/Explain_2) Alright, you chose to replace the whole outfit. Let me come up with a new recommended outfit for you.")
+            self.say_animated("^start(animations/Stand/Gestures/Everything_2) Alright, you chose to replace the whole outfit. ^wait(animations/Stand/Gestures/Everything_2)")
+            self.say_animated("^start(animations/Stand/Gestures/Me_2) Let me come up with a new recommended outfit for you. ^wait(animations/Stand/Gestures/Me_2)")
         else:
-            self.say_animated("^start(animations/Stand/Gestures/Explain_2) Okay, let me come up with new recommendations for the pieces you chose to replace.")
+            self.say_animated("^start(animations/Stand/Gestures/Me_2) Okay, let me come up with new recommendations for the pieces you chose to replace. ^wait(animations/Stand/Gestures/Me_2)")
         self.neutral()
         self.reset_replace()
         self.generate_recommendation()
@@ -356,7 +371,8 @@ class BehaviorModule(ALModule):
 
     def closing_remarks(self):
         self.breathing_off()
-        self.say_animated("^start(animations/Stand/Gestures/Salute_1) I'm so glad I could be of assistance ^wait(animations/Stand/Gestures/Salute_1). ^start(animations/Stand/Gestures/You_5) Hope you have a great rest of your day. ^wait(animations/Stand/Gestures/You_5) ^start(animations/Stand/BodyTalk/Speaking/BodyTalk_5) See you soon. ^wait(animations/Stand/BodyTalk/Speaking/BodyTalk_5)")
+        self.say_animated("^start(animations/Stand/Gestures/Salute_1) I'm so glad I could be of assistance ^wait(animations/Stand/Gestures/Salute_1). ^start(animations/Stand/Gestures/You_5) Hope you have a great rest of your day. ^wait(animations/Stand/Gestures/You_5)")
+        self.say_animated("^start(animations/Stand/Gestures/Hey_1) Bye for now, hope to see you again soon. ^wait(animations/Stand/Gestures/Hey_1)")
         self.reset_eyes()
     
 
@@ -365,8 +381,9 @@ class BehaviorModule(ALModule):
     '''
     def wake(self):
         self.waitnext_server()
-        self.say_post("Select a user profile to begin.")
         self.motion.wakeUp() 
+        self.say_post("Select a user profile to begin.")
+        self.beckon()
         
 
     def rest(self):
@@ -407,13 +424,26 @@ class BehaviorModule(ALModule):
             self.motion.setBreathEnabled('Body', True)
             print "Started Breathing"
             self.is_breathing = True
+            self.facetrack_on()
     
     def breathing_off(self):
-         if self.is_breathing:
+        self.facetrack_off()
+        if self.is_breathing:
             self.motion.setBreathEnabled('Body', False)
             print "Stopped Breathing"
             self.is_breathing = False
-
+           
+    def facetrack_on(self):
+        target_name = "Face"
+        face_width = 0.1
+        self.tracker.registerTarget(target_name, face_width)
+        self.tracker.track(target_name)
+    
+    def facetrack_off(self):
+        self.tracker.stopTracker()
+        self.tracker.unregisterAllTargets()
+    
+    
     def beckon(self):
 
 

@@ -68,7 +68,8 @@ def waitnext_client():
     print "Letting program know user hit next button"
     try:
         waitnext = rospy.ServiceProxy('waitnext', WaitNext)
-        waitnext()
+        number = waitnext()
+
     except rospy.ServiceException, e:
         print"Service call failed: %s"%e   
 
@@ -119,7 +120,7 @@ if __name__ == "__main__":
         elif client == "featuretype":
             featuretype_client(0, speech)
         elif client == "features":
-            features_client(1, 1, 1, 1, 1, 1, 1)
+            features_client(1, 2, 0, 1, 4, 1, 1)
         elif client == "recommendations":
             recommendations_client()
         elif client == "recommendationstwo":
@@ -131,9 +132,9 @@ if __name__ == "__main__":
         elif client == "waitacceptance":
             waitacceptance_client(1)
         elif client == "waitreplacetwo":    
-            waitreplacetwo_client(0, 1, 0, 1, 0)
+            waitreplacetwo_client(1, 1, 0, 1, 0)
         elif client == "waitreplace":    
-            waitreplace_client(0, 1, 0, 1, 0)
+            waitreplace_client(1, 1, 0, 1, 0)
         elif client == "exit":
             break
         else:

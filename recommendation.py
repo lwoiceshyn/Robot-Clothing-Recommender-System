@@ -81,7 +81,7 @@ outer_clothing =   ["Black Windbreaker",
 
 shoes_clothing = [  "White Sneakers",
                     "Running Shoes",
-                    "Grey Desert Boots"
+                    "Grey Desert Boots",
                     "Black Oxfords"]
 upper_indices = None
 lower_indices = None
@@ -512,7 +512,7 @@ def main():
     upper_path = '/home/leo/models/uppermodel2.model'
     lower_path = '/home/leo/models/lowermodel2.model'
     outer_path = '/home/leo/models/outermodel.model'
-    shoes_path = '/home/leo/models/shoesmodel6.model'
+    shoes_path = '/home/leo/models/shoesmodel7.model'
 
     upper_classifier = Classifier(jobject=serialization.read(upper_path))
     lower_classifier = Classifier(jobject=serialization.read(lower_path))

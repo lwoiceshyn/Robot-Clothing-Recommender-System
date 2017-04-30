@@ -1,9 +1,0 @@
-int64 inside_outside
-int64 outside_warmth
-int64 athletic
-int64 casual_formal
-int64 comfort
-int64 snow
-int64 rain
----
-#Just an input service

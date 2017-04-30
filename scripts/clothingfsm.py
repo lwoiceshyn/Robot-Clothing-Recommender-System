@@ -142,7 +142,7 @@ def main():
 
     clothingdb = MySQLdb.connect(host="localhost",
                                  user="root",
-                                 passwd="lolcats123", # Change to your SQL DB password
+                                 passwd="mypassword", # Change to your SQL DB password
                                  db = "userprofiles")
     cursor = clothingdb.cursor()
 

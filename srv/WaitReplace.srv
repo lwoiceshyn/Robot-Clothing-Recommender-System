@@ -1,0 +1,7 @@
+int64 all #Integer, 1 means replace entire outfit, 0 means replace only some parts of outfit
+int64 upper
+int64 lower
+int64 outer
+int64 shoes
+---
+#No return values

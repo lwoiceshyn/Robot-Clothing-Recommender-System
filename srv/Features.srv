@@ -1,0 +1,9 @@
+int64 inside_outside # 0 is inside, 1 is outside
+int64 outside_warmth # scale from 1-5, where 1 is warmest, 5 is coldest 
+int64 athletic # 0 or 1, where 1 is no, 0 is yes
+int64 casual_formal # scale from 1-3, where 1 is casual, 3 is formal
+int64 comfort # scale from 1-5, where 1 is uncomfortable, 5 is comfortable
+int64 snow # scale from 1-3, where 1 is not snowing, 2 is light snow, 3 is heavy snow
+int64 rain # either 1 or 3, where 1 is no rain, 3 is any form of rain
+---
+#Just an input service

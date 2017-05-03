@@ -2,6 +2,9 @@
 import rospy
 
 def cli_recommendations(req):
+    '''
+    ROS Clothing Recommendation client, gets recommended items from recommendation module.
+    '''
     global outer
     global upper
     global lower
@@ -15,6 +18,9 @@ def cli_recommendations(req):
     return
 
 def recom_server():
+    '''
+    ROS Clothing Recommendation server.
+    '''
     stop_spinning = False 
     rospy.init_node('recommendationstwo_service')
     s = rospy.Service('recommendationstwo', CliRecommendations, cli_recommendations)
@@ -24,6 +30,9 @@ def recom_server():
 
 
 def recom_client():
+    '''
+    ROS Clothing Recommendation client.
+    '''
     global outer
     global upper
     global lower
@@ -43,7 +52,9 @@ def recom_client():
         print "Service call failed: %s"%e
 
 def reselect(outer, upper, lower, shoes):
-
+    '''
+    ROS service for reselecting clothing.
+    '''
     replaceall = ((outer) and (upper) and (lower) and (shoes))
     if replaceall == True:
         replaceall = 1
@@ -66,7 +77,9 @@ def reselect(outer, upper, lower, shoes):
         print "Service call failed: %s"%e
 
 def presetoutfit(activity):
-
+    '''
+    Responds to user selecting a preset outfit.
+    '''
     temp1 = urllib.urlopen(url).read()
     temp = temp1.split("\"temp\":")
     temp = temp[1].split(",\"pressure\"")
@@ -113,6 +126,9 @@ def presetoutfit(activity):
         print "Service call failed: %s"%e
 
 def customoutfit():
+    '''
+    Responds to user selecting a custom outfit.
+    '''
     print("customoutfit")
     rospy.wait_for_service('featuretype')
     try:
@@ -139,7 +155,9 @@ def sendprofile(profile_name):
 
 
 def sendfeatures():
-
+    '''
+    Sends feature information to the clothing recommendation module.
+    '''
     temp1 = urllib.urlopen(url).read()
     temp = temp1.split("\"temp\":")
     temp = temp[1].split(",\"pressure\"")
@@ -180,6 +198,9 @@ def sendfeatures():
     print("wait3")
 
 def accept(accept):
+    '''
+    Responds to user accepting the recommended outfit.
+    '''
     rospy.wait_for_service('waitacceptancetwo')
     try:
         recom_srv = rospy.ServiceProxy('waitacceptancetwo', WaitAcceptanceTwo)
